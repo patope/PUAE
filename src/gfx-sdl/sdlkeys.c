@@ -287,6 +287,48 @@ static int decode_se (int keysym)
 }
 
 /*
+ * Handle keys specific to FI keymaps.
+ */
+static int decode_fi (int keysym)
+{
+    switch (keysym) {
+	case SDLK_a:		return AK_A;
+	case SDLK_m:		return AK_M;
+	case SDLK_q:		return AK_Q;
+	case SDLK_w:		return AK_W;
+	case SDLK_y:		return AK_Y;
+	case SDLK_z:		return AK_Z;
+	case SDLK_WORLD_0:	return AK_LBRACKET;
+	case SDLK_WORLD_1:	return AK_QUOTE;
+	case SDLK_WORLD_2:	return AK_LBRACKET;
+	case SDLK_WORLD_3:	return AK_LBRACKET;
+	case SDLK_WORLD_4:	return AK_LBRACKET;
+	case SDLK_WORLD_5:	return AK_LBRACKET;
+
+
+	case SDLK_WORLD_86:	return AK_SEMICOLON;
+	case SDLK_WORLD_68:	return AK_QUOTE;
+	case SDLK_WORLD_69:	return AK_LBRACKET;
+
+
+	case SDLK_COMMA:	return AK_COMMA;
+	case SDLK_PERIOD:	return AK_PERIOD;
+	case SDLK_MINUS:	return AK_SLASH;
+	case SDLK_LESS:
+	case SDLK_GREATER:	return AK_LTGT;
+	case SDLK_PLUS:
+	case SDLK_QUESTION:	return AK_EQUAL;
+	case SDLK_AT:
+	case SDLK_WORLD_29:	return AK_BACKQUOTE;
+	case SDLK_CARET:	return AK_RBRACKET;
+	case SDLK_BACKSLASH:	return AK_MINUS;
+	case SDLK_HASH:		return AK_NUMBERSIGN;
+	default: return -1;
+    }
+}
+
+
+/*
  * Handle keys specific to Italian keymaps.
  */
 static int decode_it (int keysym)
@@ -377,6 +419,8 @@ int keysym2amiga (int keysym)
 		amiga_keycode = decode_de (keysym); break;
 	    case KBD_LANG_DK:
 		amiga_keycode = decode_dk (keysym); break;
+	    case KBD_LANG_FI:
+		amiga_keycode = decode_fi (keysym); break;
 	    case KBD_LANG_SE:
 		amiga_keycode = decode_se (keysym); break;
 	    case KBD_LANG_IT:

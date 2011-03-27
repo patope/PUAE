@@ -1092,12 +1092,26 @@ void cfgfile_save_options (struct zfile *f, struct uae_prefs *p, int type)
 		: p->keyboard_lang == KBD_LANG_DK ? _T("dk")
 		: p->keyboard_lang == KBD_LANG_ES ? _T("es")
 		: p->keyboard_lang == KBD_LANG_US ? _T("us")
+		: p->keyboard_lang == KBD_LANG_FI ? _T("fi")
 		: p->keyboard_lang == KBD_LANG_SE ? _T("se")
 		: p->keyboard_lang == KBD_LANG_FR ? _T("fr")
 		: p->keyboard_lang == KBD_LANG_IT ? _T("it")
 		: p->keyboard_lang == KBD_LANG_FI ? _T("fi")
 		: p->keyboard_lang == KBD_LANG_TR ? _T("tr")
 		: _T("FOO")));
+		cfgfile_dwrite (f, "catweasel", "%d", p->catweasel);
+
+	cfgfile_write_str (f, "kbd_lang", (p->keyboard_lang == KBD_LANG_DE ? "de"
+		: p->keyboard_lang == KBD_LANG_DK ? "dk"
+		: p->keyboard_lang == KBD_LANG_ES ? "es"
+		: p->keyboard_lang == KBD_LANG_US ? "us"
+		: p->keyboard_lang == KBD_LANG_FI ? "fi"
+		: p->keyboard_lang == KBD_LANG_SE ? "se"
+		: p->keyboard_lang == KBD_LANG_FR ? "fr"
+		: p->keyboard_lang == KBD_LANG_IT ? "it"
+		: p->keyboard_lang == KBD_LANG_TR ? "tr"
+		: "FOO"));
+>>>>>>> Finnish keyboard support
 
 #ifdef SAVESTATE
 	cfgfile_dwrite (f, _T("state_replay_rate"), _T("%d"), p->statecapturerate);
@@ -1958,6 +1972,7 @@ cfgfile_path (option, value, _T("floppy0soundext"), p->floppyslots[0].dfxclickex
 		KbdLang l;
 		if ((l = KBD_LANG_DE, strcasecmp (value, _T("de")) == 0)
 			|| (l = KBD_LANG_DK, strcasecmp (value, _T("dk")) == 0)
+			|| (l = KBD_LANG_FI, strcasecmp (value, _T("fi")) == 0)
 			|| (l = KBD_LANG_SE, strcasecmp (value, _T("se")) == 0)
 			|| (l = KBD_LANG_US, strcasecmp (value, _T("us")) == 0)
 			|| (l = KBD_LANG_FR, strcasecmp (value, _T("fr")) == 0)
@@ -3644,7 +3659,14 @@ int parse_cmdline_option (struct uae_prefs *p, TCHAR c, const TCHAR *arg)
 			p->keyboard_lang = KBD_LANG_DK;
 		else if (0 == strcasecmp(arg, _T("us")))
 			p->keyboard_lang = KBD_LANG_US;
+		else if (0 == strcasecmp(arg, _T("fi")))
+			p->keyboard_lang = KBD_LANG_FI;
 		else if (0 == strcasecmp(arg, _T("se")))
+=======
+		else if (0 == strcasecmp(arg, "fi"))
+			p->keyboard_lang = KBD_LANG_FI;
+		else if (0 == strcasecmp(arg, "se"))
+>>>>>>> Finnish keyboard support
 			p->keyboard_lang = KBD_LANG_SE;
 		else if (0 == strcasecmp(arg, _T("fr")))
 			p->keyboard_lang = KBD_LANG_FR;
